@@ -8,7 +8,7 @@ export default function Counter() {
     mm: 0,
     ss: 0
   });
-  let [remaining, setRemaining] = useState()
+  const [checktimenegative, setChecktimenegative] = useState()
   useEffect(() => {
     const sec = 1000,
       min = sec * 60,
@@ -19,8 +19,8 @@ export default function Counter() {
       // change the date to 2022 to see the  "Website has been constructed" text
       const end = new Date("Jul 05, 2023 12:00:00").getTime();
       const current = new Date().getTime();
-      setRemaining(end - current);
-
+      const remaining = end - current;
+      setChecktimenegative(remaining)
       let dd = Math.floor(remaining / day);
       let hh = Math.floor((remaining % day) / hour);
       let mm = Math.floor((remaining % hour) / min);
@@ -34,11 +34,11 @@ export default function Counter() {
     return () => {
       clearInterval(clockInterval);
     }
-  }, [remaining]);
+  }, []);
   return (
     <div className="flex-w flex-c-m cd100 p-b-33">
       {
-        remaining < 0 ?
+        checktimenegative < 0 ?
           <>
             <div className="m2-txt1">
               Website has been constructed!! Please visit <a style={{ textDecoration: `none`, color: "white" }} href="#">"Link"</a>
